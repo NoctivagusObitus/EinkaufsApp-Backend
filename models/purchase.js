@@ -10,14 +10,14 @@ var purchaseSchema = mongoose.Schema({
 });
 
 purchaseSchema.statics.findByBuyerUser= function (user, schema){
-    return this.find({buyer_user: user, schema});
+    return this.find({buyer_user: user}, schema);
 }
 
 purchaseSchema.statics.findByBenefitialUser= function (user, schema){
-    return this.find({benefitial_user: user, schema});
+    return this.find({benefitial_user: user}, schema);
 }
 
 purchaseSchema.statics.findByBuyerUser= function (user, schema){
-    return this.find({buyer_user: user, schema});
+    return this.find({buyer_user: user}, schema);
 }
 module.exports = mongoose.model('Purchase', purchaseSchema);

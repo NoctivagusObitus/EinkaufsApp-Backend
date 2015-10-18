@@ -9,6 +9,7 @@ var purchaseSchema = mongoose.Schema({
     purchased_articles: [{article_cots_id: Schema.Types.ObjectId, amount: Number}]
 });
 
+
 purchaseSchema.statics.findByBuyerUser= function (user, schema){
     return this.find({buyer_user: user}, schema);
 }

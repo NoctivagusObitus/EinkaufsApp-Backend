@@ -3,13 +3,13 @@ var router = express.Router();
 var Article = require('../models/article');
 var ArticleCosts = require('../models/article_costs');
 
-router.get('/', function(req, res, next){
+router.get('/', auth, function(req, res, next){
     Article.find(function(err, artikel){
         res.send(artikel);
     });
 });
 
-router.post('/add', function(req, res, next){
+router.post('/add', auth, function(req, res, next){
     var new_artikel = new Article({name: req.body.name, ean: req.body.ean});
     new_artikel.save(function(err){
         console.log(err);
@@ -17,21 +17,21 @@ router.post('/add', function(req, res, next){
     res.send("k");
 });
 
-router.post('/delete/:id', function(req, res, next){
+router.post('/delete/:id', auth, function(req, res, next){
     Article.remove({_id: req.params.id }, function(err){
         console.log(err);
         res.send("k");
     });
 });
 
-router.post('/:id', function(req, res, next){
+router.post('/:id', auth, function(req, res, next){
     Article.findbyId(req.params.id, function(err, articles){
         res.send(articles);
     });
 });
 
 
-router.post('/edit/:id', function(req, res, next){
+router.post('/edit/:id', auth, function(req, res, next){
     Article.findbyId(req.params.id, function (err, article){
         if (err) {
             console.log(err);
@@ -48,7 +48,7 @@ router.post('/edit/:id', function(req, res, next){
     });
 });
 
-router.get('/bystore/:id', function(req, res, next){
+router.get('/bystore/:id', auth, function(req, res, next){
     var storeid = req.params.id;
     ArticleCosts.find({store_id: storeid}, function (err, elements){
         var articles = [];

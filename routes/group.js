@@ -3,7 +3,7 @@ var router = express.Router();
 var Group = require('../models/group');
 
 
-router.get('/', function (req, res, next){
+router.get('/', auth, function (req, res, next){
     Group.find(function (err, groups){
         res.send(groups);
     });

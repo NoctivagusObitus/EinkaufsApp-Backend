@@ -7,11 +7,11 @@ var articleSchema = mongoose.Schema({
 });
 
 articleSchema.statics.findByName = function (name, schema){
-    return this.find({name: name, schema});
+    return this.find({name: name}, schema);
 }
 
 articleSchema.statics.findByEan = function (ean, schema){
-    return this.find({ean: ean, schema});
+    return this.find({ean: ean}, schema);
 }
 
 articleSchema.statics.findbyIds = function(ids, schema){

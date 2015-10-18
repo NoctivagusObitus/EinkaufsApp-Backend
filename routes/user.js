@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var auth = require('../conf/auth.js');
+
 router.get('/', auth, function (req, res, next){
     User.find(function (err, users){
         res.send(users);

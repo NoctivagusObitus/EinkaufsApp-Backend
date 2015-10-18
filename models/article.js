@@ -6,6 +6,7 @@ var articleSchema = mongoose.Schema({
     ean: String
 });
 
+
 articleSchema.statics.findByName = function (name, schema){
     return this.find({name: name}, schema);
 }

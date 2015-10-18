@@ -1,7 +1,8 @@
+var User = require('../models/user');
+
 module.exports = function isAuthenticated(req, res, next) {
-  if (req.user == null){
+    if (req.isAuthenticated())
+        return next();
     req.flash('error', 'Keine Berechtigung für diese Route. Bitte einloggen.');
-    return res.redirect('/login')
-  }
-  return next();
+    res.redirect('/login');
 }

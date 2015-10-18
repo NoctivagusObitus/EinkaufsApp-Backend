@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  form(method='POST')
+    legend Passwort zurücksetzen
+    .form-group
+      label(for='password') Neues Passwort
+      input.form-control(type='password', name='password', value='', placeholder='Neues Passwort', autofocus=true)
+    .form-group
+      label(for='confirm') Passwort bestätigen
+      input.form-control(type='password', name='confirm', value='', placeholder='Passwort bestätigen')
+    .form-group
+      button.btn.btn-primary(type='submit') Bestätigen

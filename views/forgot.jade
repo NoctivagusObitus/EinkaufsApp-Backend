@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  form(method='POST')
+    legend Passwort vergessen
+    .form-group
+      label(for='email') E-Mail
+      input.form-control(type='text', name='email', autofocus)
+    button.btn.btn-primary(type='submit') Passwort zurücksetzen

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Cost = require('../models/cost');
+var auth = require('../conf/auth.js');
 
 
 router.get('/', auth, function (req, res, next){

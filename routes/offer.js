@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Offer = require('../models/offer');
-
+var auth = require('../conf/auth.js');
 
 router.get('/', auth, function (req, res, next){
     Offer.find(function (err, offers){

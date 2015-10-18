@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Article = require('../models/article');
 var ArticleCosts = require('../models/article_costs');
+var auth = require('../conf/auth.js');
 
 router.get('/', auth, function(req, res, next){
     Article.find(function(err, artikel){

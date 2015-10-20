@@ -3,9 +3,8 @@ var mongoose = require('mongoose')
 
 var articleSchema = mongoose.Schema({
     name: String,
-    ean: String
+    ean: Number
 });
-
 
 articleSchema.statics.findByName = function (name, schema){
     return this.find({name: name}, schema);

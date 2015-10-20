@@ -26,4 +26,22 @@ router.post('/', function(req, res, next) {
   })(req, res, next);
 });
 
+router.post('/app', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) return next(err)
+    if (!user) {
+      req.flash('error', 'Login fehlgeschlagen');
+      return res.send("error");
+    }
+    req.logIn(user, function(err) {
+      if (err) {
+        req.flash('error', 'Login fehlgeschlagen - PW');
+        return res.send("error");
+      }
+      req.flash('success', 'Login erfolgreich');
+      return res.send("ok");
+    });
+  })(req, res, next);
+});
+
 module.exports = router;

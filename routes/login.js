@@ -31,12 +31,12 @@ router.post('/app', function(req, res, next) {
     if (err) return next(err)
     if (!user) {
       req.flash('error', 'Login fehlgeschlagen');
-      return res.send({status: "error"});
+      return res.send({status: "error", message: 'Login fehlgeschlagen'});
     }
     req.logIn(user, function(err) {
       if (err) {
         req.flash('error', 'Login fehlgeschlagen - PW');
-        return res.send({status: "error"});
+        return res.send({status: "error", message: 'Login fehlgeschlagen - PW'});
       }
       req.flash('success', 'Login erfolgreich');
       return res.send({status: "ok"});

@@ -25,7 +25,7 @@ router.post('/delete/:id', auth, function(req, res, next){
     });
 });
 
-router.post('/:id', auth, function(req, res, next){
+router.get('/:id', auth, function(req, res, next){
     Article.findbyId(req.params.id, function(err, articles){
         res.send(articles);
     });

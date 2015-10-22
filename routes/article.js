@@ -39,7 +39,7 @@ router.post('/edit/:id', auth, function(req, res, next){
             res.send(err);
         }
         article.name = req.body.name;
-        article.ean = req.article.ean;    
+        article.ean = req.body.ean;    
         article.save(function (err){
             if (err) {
                 console.log(err);

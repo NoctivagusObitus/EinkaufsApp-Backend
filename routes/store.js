@@ -29,7 +29,7 @@ router.post('/edit/:id', auth, function(req, res, next){
         if (err) {
             console.log(err);
             res.send(err);
-        } else res.send({"k"});
+        } else res.send("k");
         store.name= req.body.name;
         store.gps.ln = req.body.ln;    
         store.gps.lat = req.body.lat;    
@@ -41,7 +41,7 @@ router.post('/edit/:id', auth, function(req, res, next){
             if (err) {
                 console.log(err);
                 res.send(err);
-            } else res.send({"k"});
+            } else res.send("k");
         });
     });
 });

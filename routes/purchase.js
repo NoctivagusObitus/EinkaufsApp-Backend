@@ -28,7 +28,7 @@ router.post('/edit/:id', auth, function(req, res, next){
         if (err) {
             console.log(err);
             res.send(err);
-        } else res.send({"k"});
+        } else res.send("k");
         purchase.date= req.body.date;
         purchase.buyer_user = req.article.buyer_user;    
         purchase.benefitial_user = req.body.benefitial_user;    
@@ -38,7 +38,7 @@ router.post('/edit/:id', auth, function(req, res, next){
             if (err) {
                 console.log(err);
                 res.send(err);
-            } else res.send({"k"});
+            } else res.send("k");
         });
     });
 });

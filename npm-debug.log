@@ -1,7 +1,7 @@
 0 info it worked if it ends with ok
 1 verbose cli [ 'E:\\Development\\NodeJS\\node.exe',
 1 verbose cli   'C:\\Users\\Basti\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'start' ] 2
+1 verbose cli   'start' ]
 2 info using npm@3.3.3
 3 info using node@v4.1.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]

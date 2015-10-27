@@ -5,14 +5,14 @@ block content
     legend Registrieren
     .form-group
       label(for='username') Benutzername
-      input.form-control(type='text', name='username', autofocus)
+      input.form-control(type='text', name='username', autofocus, value='#{cusername}')
     .form-group
       label(for='email') E-Mail
-      input.form-control(type='text', name='email')
+      input.form-control(id='em', type='text', name='email', value='#{cmail}')
     .form-group
       label(for='password') Passwort
-      input.form-control(type='password', name='password')
+      input.form-control(type='password', name='password', value='#{cpassword}')
     .form-group
       label(for='confirm') Passwort bestätigen
-      input.form-control(type='password', name='confirm')
+      input.form-control(type='password', name='confirm', value='#{cpasswordconfirm}')
     button.btn.btn-primary(type='submit') Registrieren

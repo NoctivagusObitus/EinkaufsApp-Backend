@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/', function(req, res){
   res.render('index', {
-    title: 'Outside',
+    title: 'Public',
     user: req.user
   });
 });

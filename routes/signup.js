@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/', function(req, res) {
+router.post('/app', function(req, res) {
     if (!validateEmail(req.body.email)){
       req.flash('error', 'Deine E-Mail Adresse scheint nicht korrekt zu sein  ');
       //return res.redirect('/signup')

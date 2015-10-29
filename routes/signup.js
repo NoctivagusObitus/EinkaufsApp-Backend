@@ -30,7 +30,6 @@ router.post('/', function (req, res) {
     
     if (!validateEmail(req.body.email)) {
         req.flash('error', 'Deine E-Mail Adresse scheint nicht korrekt zu sein  ');
-        return res.redirect('/signup')
         emailx = '';
     } else emailx = req.body.email;
     
@@ -62,7 +61,7 @@ router.post('/', function (req, res) {
             } else email = req.body.email;
             
             //Bitte die Bedinungen auch richtig ausschreiben, sonst funktioniert das nicht!
-            if ((email == '') || (pw == '')|| (cpw == '')|| (userx == '')) {
+            if ((emailx == '') || (pw == '') || (cpw == '') || (userx == '')) {
                 return res.render('signup', {
                     cusername: userx,
                     cmail: emailx,

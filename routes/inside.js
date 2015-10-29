@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/', auth, function(req, res){  
    res.render('inside', {
-    title: 'Inside',
+    title: 'Private',
     user: req.user,
   });
 });

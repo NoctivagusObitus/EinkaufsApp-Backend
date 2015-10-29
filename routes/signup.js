@@ -62,7 +62,7 @@ router.post('/', function (req, res) {
             } else email = req.body.email;
             
             //Bitte die Bedinungen auch richtig ausschreiben, sonst funktioniert das nicht!
-            if ((email == '') || (pw == '')|| (cpw == '')|| (user == '')) {
+            if ((email == '') || (pw == '')|| (cpw == '')|| (userx == '')) {
                 return res.render('signup', {
                     cusername: userx,
                     cmail: emailx,

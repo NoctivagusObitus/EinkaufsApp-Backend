@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/app', function(req, res, next) {
+router.post('/', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) return next(err)
     if (!user) {
@@ -22,6 +22,22 @@ router.post('/app', function(req, res, next) {
       }
       req.flash('success', 'Login erfolgreich');
       return res.redirect('/Inside');
+    });
+  })(req, res, next);
+});
+
+// Wir brauchen eine ZWEITE Route für die App, welche uns nur JSON zurückgibt ;)
+router.post('/app', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) return next(err)
+    if (!user) {
+       return res.send({status: "error", message: 'Login fehlgeschlagen'});
+    }
+    req.logIn(user, function(err) {
+      if (err) {
+         return res.send({status: "error", message: 'Login fehlgeschlagen'});
+      }
+      return res.send({status: "ok"});
     });
   })(req, res, next);
 });

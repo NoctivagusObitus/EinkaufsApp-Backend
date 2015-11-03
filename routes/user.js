@@ -16,7 +16,7 @@ router.get('/:id', auth, function (req, res, next){
 });
 
 router.get('/name/:name', auth, function( req, res, next){
-    User.find({username: req.param.name}, function(err, user){
+    User.find({username: req.params.name}, function(err, user){
         res.send(user);
     });
 });

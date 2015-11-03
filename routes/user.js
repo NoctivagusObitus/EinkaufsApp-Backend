@@ -15,4 +15,10 @@ router.get('/:id', auth, function (req, res, next){
     });
 });
 
+router.get('/name/:name', auth, function( req, res, next){
+    User.find({name: name}, function(err, user){
+        res.send(user);
+    });
+});
+
 module.exports = router;

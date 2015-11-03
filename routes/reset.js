@@ -4,6 +4,12 @@ var async = require('async');
 var nodemailer = require('nodemailer');
 var router = express.Router();
 
+function validatePassword(pw){
+  // min. ein kleiner und ein großer Buchstabe sowie eine Zahl, min. 6 Zeichen lang
+  var pattern2 = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  return pattern2.test(pw);
+}
+
 router.get('/:token', function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
@@ -24,9 +30,19 @@ router.post('/:token', function(req, res) {
           req.flash('error', 'Password-Reset-Token ungültig oder abgelaufen.');
           return res.redirect('back');
         }
-        if (req.body.password != req.body.confirm){
-          req.flash('error', 'Passwörter nicht gleich');
-          return res.redirect('back')
+        if (!validatePassword(req.body.password)){
+          req.flash('error', 'Dein Passwort muss kleine und große Buchstaben sowie Zahlen beinhalten und mindestens 6 Zeichen lang sein  ');
+          var pw = '';
+          var cpw = '';
+        }else{
+            if (req.body.password != req.body.confirm){
+              req.flash('error', 'Passwörter nicht gleich  ');
+              var pw = '';
+              var cpw = '';
+            }else{
+              var pw = req.body.password;   
+              var cpw = req.body.confirm;
+            } 
         }
         user.password = req.body.password;
         user.resetPasswordToken = undefined;

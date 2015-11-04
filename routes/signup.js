@@ -3,8 +3,21 @@ var User = require('../models/user');
 var router = express.Router();
 
 function validateEmail(email) {
+    //1. Gruppe: 
     var pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return pattern.test(email);
+}
+
+function validatePassword(pw){
+  // min. ein kleiner und ein großer Buchstabe sowie eine Zahl, min. 6 Zeichen lang
+  var pattern2 = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  return pattern2.test(pw);
+}
+
+function validateUsername(username){
+  // Username: darf nur aus kleinen und großen Buchstaben sowie Zahlen und "-" sowie "_" bestehen - Länge: 3 - 20 Zeichen
+  var pattern3 = /^[a-zA-Z0-9_-]{3,20}$/; 
+  return pattern3.test(username)
 }
 
 router.get('/', function (req, res) {
@@ -33,13 +46,19 @@ router.post('/', function (req, res) {
         emailx = '';
     } else emailx = req.body.email;
     
-    if (req.body.password != req.body.confirm) {
-        req.flash('error', 'Passwörter nicht gleich  ');
-        pw = '';
-        cpw = '';
-    } else {
-        pw = req.body.password;
-        cpw = req.body.confirm;
+    if (!validatePassword(req.body.password)){
+      req.flash('error', 'Dein Passwort muss kleine und große Buchstaben sowie Zahlen beinhalten und mindestens 6 Zeichen lang sein  ');
+      var pw = '';
+      var cpw = '';
+    }else{
+        if (req.body.password != req.body.confirm){
+          req.flash('error', 'Passwörter nicht gleich  ');
+          var pw = '';
+          var cpw = '';
+        }else{
+          var pw = req.body.password;   
+          var cpw = req.body.confirm;
+        } 
     }
     
     User.findOne({ username: req.body.username}, function (err, user) {
@@ -48,8 +67,12 @@ router.post('/', function (req, res) {
         if (user) {
             req.flash('error', 'Benutzername bereits vergeben  ');
             userx = '';
-        } else userx = req.body.username;
-
+        }else{
+            if (!validateUsername(req.body.username)) {
+                req.flash('error', 'Der Benutzername darf nur kleine und große Buchstaben sowie Zahlen enthalten und muss 3 - 20 Zeichen lang sein  ');
+                userx = '';
+            } else userx = req.body.username;
+        }
         User.findOne({
             email: req.body.email
         }, function (err, user) {       

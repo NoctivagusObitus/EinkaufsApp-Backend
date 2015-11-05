@@ -3,7 +3,6 @@ var User = require('../models/user');
 var router = express.Router();
 
 function validateEmail(email) {
-    //1. Gruppe: 
     var pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return pattern.test(email);
 }
@@ -22,7 +21,7 @@ function validateUsername(username){
 
 router.get('/', function (req, res) {
     res.render('signup', {
-        user: '',
+        user: req.user,
         cusername: '',
         cmail: '',
         cpassword: '',
@@ -80,8 +79,8 @@ router.post('/', function (req, res) {
             
             if (user) {
                 req.flash('error', 'E-Mail bereits vergeben  ');
-                email = '';
-            } else email = req.body.email;
+                emailx = '';
+            } else emailx = req.body.email;
             
             //Bitte die Bedinungen auch richtig ausschreiben, sonst funktioniert das nicht!
             if ((emailx == '') || (pw == '') || (cpw == '') || (userx == '')) {
@@ -96,7 +95,8 @@ router.post('/', function (req, res) {
             var user = new User({
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                css: '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css'
             });
 
             user.save(function (err) {
@@ -118,13 +118,23 @@ router.post('/app', function (req, res) {
             message: 'Deine E-Mail Adresse scheint nicht korrekt zu sein.'
         });
     }
-    if (req.body.password != req.body.confirm) {
-        req.flash('error', 'Passwörter nicht gleich');
-        return res.send({
+    
+    if (!validatePassword(req.body.password)){
+      req.flash('error', 'Dein Passwort muss kleine und große Buchstaben sowie Zahlen beinhalten und mindestens 6 Zeichen lang sein  ');
+      return res.send({
+        status: 'error',
+        message: 'Dein Passwort muss kleine und große Buchstaben sowie Zahlen beinhalten und mindestens 6 Zeichen lang sein'
+      });
+    }else{
+        if (req.body.password != req.body.confirm){
+          req.flash('error', 'Passwörter nicht gleich  ');
+          return res.send({
             status: 'error',
             message: 'Passwörter nicht gleich'
-        });
+          });
+        }
     }
+    
     User.findOne({
         username: req.body.username
     }, function (err, user) {
@@ -135,6 +145,14 @@ router.post('/app', function (req, res) {
                 status: 'error',
                 message: 'Benutzername bereits vergeben.'
             });
+        }else{
+          if (!validateUsername(req.body.username)) {
+            req.flash('error', 'Der Benutzername darf nur kleine und große Buchstaben sowie Zahlen enthalten und muss 3 - 20 Zeichen lang sein  ');
+            return res.send({
+              status: 'error',
+              message: 'Der Benutzername darf nur kleine und große Buchstaben sowie Zahlen enthalten und muss 3 - 20 Zeichen lang sein'
+            });
+          }            
         }
         User.findOne({
             email: req.body.email
@@ -147,10 +165,12 @@ router.post('/app', function (req, res) {
                     message: 'E-Mail bereits vergeben.'
                 });
             }
+            
             var user = new User({
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                css: '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css'
             });
 
             user.save(function (err) {

@@ -32,6 +32,7 @@ var inside = require('./routes/inside');
 var signup = require('./routes/signup');
 var forgot = require('./routes/forgot');
 var reset = require('./routes/reset');
+var css = require('./routes/css');
 
 
 mongoose.connect(configDB.url);
@@ -69,6 +70,7 @@ app.use('/inside', inside);
 app.use('/signup', signup);
 app.use('/forgot', forgot);
 app.use('/reset', reset);
+app.use('/css', css);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,8 +7,12 @@ html
         var cssFile;
         var localuser =!{JSON.stringify(user)}
         localuser = localuser; //Ich habe keine Ahnung warum es ohne diese Zeile die CSS im ausgeloggtem Modus nicht läd
-        if (localuser){        
-          cssFile = localuser.css;
+        if (localuser){
+          if (typeof localuser.css == "undefined"){
+            var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css';
+          }else{
+            cssFile = localuser.css;
+          }
         }else{
           var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css';
         }
@@ -17,10 +21,7 @@ html
         newlink.setAttribute("type", "text/css");
         newlink.setAttribute("href", cssFile);
         document.getElementsByTagName("head").item(0).appendChild(newlink);
-        }        
-        function setCSS(file){
-        alert(file + ' nicht implementiert!'); //Hier müsste die Spalte css im User auf "file" gesetzt werden - geht aber leider nicht
-        }        
+        }     
         changeCSS();
     script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
     script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
@@ -46,9 +47,15 @@ html
                   span.caret         
                 ul.dropdown-menu
                   li
-                    a(href='/Inside', onclick='setCSS("//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/darkly/bootstrap.min.css")') Darkly
+                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Fyeti%2Fbootstrap.min.css') Default
                   li
-                    a(href='/Inside', onclick='setCSS("//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/superhero/bootstrap.min.css")') Superhero
+                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Fdarkly%2Fbootstrap.min.css') Darkly
+                  li
+                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Fsuperhero%2Fbootstrap.min.css') Superhero
+                  li
+                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Funited%2Fbootstrap.min.css') United
+                  li
+                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Freadable%2Fbootstrap.min.css') Readable
               li
                 a(href='/logout') Logout
             else

@@ -68,7 +68,6 @@ app.use('/forgot', forgot);
 app.use('/reset', reset);
 app.use('/css', css);
 
-swagger.setAppHandler(swaggerpath);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

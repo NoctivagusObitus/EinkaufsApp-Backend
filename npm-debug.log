@@ -1,0 +1,44 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'E:\\Development\\NodeJS\\node.exe',
+1 verbose cli   'C:\\Users\\Basti\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'start' ]
+2 info using npm@3.3.3
+3 info using node@v4.1.0
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle happ-backend@0.0.0~prestart: happ-backend@0.0.0
+6 silly lifecycle happ-backend@0.0.0~prestart: no script for prestart, continuing
+7 info lifecycle happ-backend@0.0.0~start: happ-backend@0.0.0
+8 verbose lifecycle happ-backend@0.0.0~start: unsafe-perm in lifecycle true
+9 verbose lifecycle happ-backend@0.0.0~start: PATH: C:\Users\Basti\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;E:\Development\Projects\EinkaufsApp\einkaufsapp\node_modules\.bin;C:\Program Files\ImageMagick-6.9.1-Q16;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\FPC\2.6.2\bin\i386-Win32;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Calibre2\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;E:\Development\Git\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft Network Monitor 3\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Java\jdk1.7.0_51\bin;E:\Development\Android\SDK\tools;E:\Development\Android\SDK\platform-tools;E:\Development\Ant\bin;E:\Development\NodeJS\;C:\Program Files\Microsoft\Web Platform Installer\;E:\Development\Ruby\Ruby22\bin;C:\Program Files (x86)\Nmap;C:\Program Files\Java\jdk1.7.0_51\bin;E:\Development\Android\SDK\platform-tools;E:\Development\Ant\bin;C:\Users\Basti\AppData\Roaming\npm;E:\Development\Android\SDK\tools;E:\Development\Android\SDK\platform-tools
+10 verbose lifecycle happ-backend@0.0.0~start: CWD: E:\Development\Projects\EinkaufsApp\einkaufsapp
+11 silly lifecycle happ-backend@0.0.0~start: Args: [ '/d /s /c', 'node ./bin/www' ]
+12 silly lifecycle happ-backend@0.0.0~start: Returned: code: 1  signal: null
+13 info lifecycle happ-backend@0.0.0~start: Failed to exec start script
+14 verbose stack Error: happ-backend@0.0.0 start: `node ./bin/www`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Users\Basti\AppData\Roaming\npm\node_modules\npm\lib\utils\lifecycle.js:233:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Users\Basti\AppData\Roaming\npm\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:817:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid happ-backend@0.0.0
+16 verbose cwd E:\Development\Projects\EinkaufsApp\einkaufsapp
+17 error Windows_NT 10.0.10240
+18 error argv "E:\\Development\\NodeJS\\node.exe" "C:\\Users\\Basti\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "start"
+19 error node v4.1.0
+20 error npm  v3.3.3
+21 error code ELIFECYCLE
+22 error happ-backend@0.0.0 start: `node ./bin/www`
+22 error Exit status 1
+23 error Failed at the happ-backend@0.0.0 start script 'node ./bin/www'.
+23 error This is most likely a problem with the happ-backend package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     node ./bin/www
+23 error You can get their info via:
+23 error     npm owner ls happ-backend
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

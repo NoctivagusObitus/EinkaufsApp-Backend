@@ -3,7 +3,8 @@ var mongoose = require('mongoose')
 
 var articleSchema = mongoose.Schema({
     name: String,
-    ean: Number
+    ean: Number,
+    avg_price: Number
 });
 
 articleSchema.statics.findByName = function (name, schema){

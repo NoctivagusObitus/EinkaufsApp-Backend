@@ -1,5 +1,5 @@
 var express = require('express');
-var session = require('express-session')
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -21,9 +21,7 @@ var routes = require('./routes/index');
 var users = require('./routes/user');
 var artikel = require('./routes/article');
 var apidoc = require('./routes/api_doc');
-var cost = require('./routes/cost');
 var group = require('./routes/group');
-var offer = require('./routes/offer');
 var purchase = require('./routes/purchase');
 var store = require('./routes/store');
 var login = require('./routes/login');
@@ -58,9 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/user', users);
 app.use('/article', artikel);
-app.use('/cost', cost);
 app.use('/group', group);
-app.use('/offer', offer);
 app.use('/purchase', purchase);
 app.use('/store', store);
 app.use('/apidoc', apidoc);
@@ -71,6 +67,8 @@ app.use('/signup', signup);
 app.use('/forgot', forgot);
 app.use('/reset', reset);
 app.use('/css', css);
+
+swagger.setAppHandler(swaggerpath);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

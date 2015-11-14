@@ -3,10 +3,9 @@ var mongoose = require('mongoose')
 
 var purchaseSchema = mongoose.Schema({
     date: Date,
-    buyer_user: { type: Schema.Types.ObjectId, ref: 'User'},
-    benefitial_user: { type: Schema.Types.ObjectId, ref: 'User'},
-    benefitial_group: { type: Schema.Types.ObjectId, ref: 'Group'},
-    purchased_articles: [{article_cots_id: Schema.Types.ObjectId, amount: Number}]
+    owner_id: Schema.Types.ObjectId,
+    store_id: Schema.Types.ObjectId,
+    cart: [{ amount: Number, article_store_id: Schema.Types.ObjectId, benefitial_id: Schema.Types.ObjectId}]
 });
 
 

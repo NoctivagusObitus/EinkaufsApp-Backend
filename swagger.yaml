@@ -1,0 +1,431 @@
+swagger: '2.0'
+info:
+  title: Einkaufsapp - API
+  description: API Documentation for the EinkaufsApp Backend
+  version: 0.0.1
+host: einkaufsapp-hftlswe.rhcloud.com
+schemes:
+  - https
+basePath: /
+produces:
+  - application/json
+paths:
+  /article:
+    get:
+      summary: Articles
+      description: |
+        The Articles endpoint delivers all available articles.
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: An array of articles
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Article'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /article/{id}:
+    get:
+      summary: Article
+      description: |
+        Gets one article by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the article
+          required: true
+          type: string
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: One article object
+          schema:
+            type: object
+            $ref: '#/definitions/Article'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /article/add:
+    post:
+      summary: Add Article
+      description: Adds an Article to the database.
+      parameters:
+        - name: name
+          in: formData
+          description: Name of the article
+          required: true
+          type: string
+          format: double
+        - name: ean
+          in: formData
+          description: EAN number of the article
+          required: true
+          type: number
+          format: double
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Article'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /article/delete/{id}:
+    post:
+      summary: Delete
+      description: Deletes an article from the database.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the article
+          required: true
+          type: string
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: Article succesfully deleted
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Id of the deleted object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /article/edit/{id}:
+    post:
+      summary: Edit
+      description: Saves an edited article to database.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the article
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: Name of the article
+          required: true
+          type: string
+          format: double
+        - name: ean
+          in: formData
+          description: EAN number of the article
+          required: true
+          type: number
+          format: double
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Article'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /group:
+    get:
+      summary: List of Groups
+      description: Get a list of groups.
+      tags:
+        - Groups
+      responses:
+      responses:
+        '200':
+          description: An array of groups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+            
+  /group/{id}:
+    get:
+      summary: Group
+      description: |
+        Gets one group by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the group
+          required: true
+          type: string
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: One group object
+          schema:
+            type: object
+            $ref: '#/definitions/Group'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /group/add:
+    post:
+      summary: Add Group
+      description: Adds an Group to the database.
+      parameters:
+        - name: name
+          in: formData
+          description: Name of the group
+          required: true
+          type: string
+          format: double
+        - name: users
+          in: formData
+          description: EAN number of the article
+          required: true
+          type: array
+            items:
+            type: object
+              properties:
+                user_id: 
+                    type: string
+                     description: ID of the user within the group.
+                  permission:
+                    type: number
+                    description: Which permissions does the user have? to be defined
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Article'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /article/delete/{id}:
+    post:
+      summary: Delete
+      description: Deletes an article from the database.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the article
+          required: true
+          type: string
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: Article succesfully deleted
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Id of the deleted object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /article/edit/{id}:
+    post:
+      summary: Edit
+      description: Saves an edited article to database.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the article
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: Name of the article
+          required: true
+          type: string
+          format: double
+        - name: ean
+          in: formData
+          description: EAN number of the article
+          required: true
+          type: number
+          format: double
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Article'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+definitions:
+  Article:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: 'Unique identifier'
+      name:
+        type: string
+        description: Article name.
+      ean:
+        type: number
+        description: EAN number of article.
+      avg_price:
+        type: number
+        description: Average of all prices for this product.
+  Store:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Unique identifier
+      GPS_lng:
+        type: string
+        description: GPS longitude location.
+      GPS_lat:
+        type: string
+        description: GPS latitude location.
+      country:
+        type: string
+        description: Country the store is located in.
+      zip:
+        type: number
+        description: ZIP Code for the store
+      street:
+        type: string
+        description: Name of the street
+      street_num:
+        type: number
+        description: Number of the house
+  Group:
+    type: object
+    properties:
+      _id: 
+        type: string
+        description: unique identifier.
+      name:
+        type: string
+        description: Groupname
+      users:
+        type: array
+        items:
+          type: object
+          properties:
+            user_id: 
+              type: string
+              description: ID of the user within the group.
+            permission:
+              type: number
+              description: Which permissions does the user have? to be defined
+        description: Members of the group.
+  User:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Unique identifier
+      username:
+        type: string
+        description: Name of the user. This one is also used to login.
+      email:
+        type: string
+        description: Registered E-Mail address of the user.
+      password:
+        type: string
+        description: Password of the user. It is saved after beeing hashed.
+      css:
+        type: string
+        description: Contains data for the CSS selection offered to the user. This feature is currently only enabled on the website.
+      resetPasswordToken:
+        type: string
+        description: Token that enables the user to reset his password.
+      resetPasswordExpired:
+        type: string
+        format: date
+        description: Contains the date when the users password reset token expires.
+  Purchase:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Unique identifier
+      owner_id:
+        type: string
+        description: Id of the user that makes the purchase.
+      store_id:
+        type: string
+        description: Id of the store that the purchase is made in.
+      cart:
+        type: array
+        items:
+          type: object
+          properties:
+            amount:
+              type: number
+              description: How often did the user puchase the article?
+            article_store_id:
+              type: string
+              description: Id of the Article_Store helpermodel entity
+            benefitial_id:
+              type: string
+              description: Is the ID of the user or group that this article was purchased for
+        description: Stores the purchased articles
+  Expenses:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Unique identifier
+      user_id:
+        type: string
+        description: Id of the owners user.
+      title:
+        type: string
+        description: Total number of items available.
+      value: 
+        type: number
+        description: Value of the additional expense.
+      date:
+        type: string
+        format: day
+        description: Date the expense is first payed (if repeated) or the date a one time expense was made.
+      repeat:
+        type: number
+        description: Count of days on which the expense repeats itself. If this number is 0, there are no repeats.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

@@ -3,12 +3,10 @@ var mongoose = require('mongoose')
 
 var storeSchema = mongoose.Schema({
     name: String,
-    gps: {
-        ln: Number,
-        lat: Number
-    },
+    GPS_lng: Number,
+    GPS_lat: Number,
     country: String,
-    zip: String,
+    zip: Number,
     street: String,
     street_num: Number
 });

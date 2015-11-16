@@ -11,6 +11,7 @@ function validatePassword(pw){
 }
 
 router.get('/:token', function(req, res) {
+  // Es wird geprüft ob es das angegebene Token gibt und ob es noch nicht abgelaufen ist
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
       req.flash('error', 'Password-Reset-Token ungültig oder abgelaufen.');
@@ -25,6 +26,7 @@ router.get('/:token', function(req, res) {
 router.post('/:token', function(req, res) {
   async.waterfall([
     function(done) {
+      // schaut ob es einen User mit diesem Token gibt und ob die Zeit noch nicht abgelaufen ist
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
           req.flash('error', 'Password-Reset-Token ungültig oder abgelaufen.');
@@ -44,6 +46,7 @@ router.post('/:token', function(req, res) {
               var cpw = req.body.confirm;
             } 
         }
+        // Passwort reset war erfolgreich - Token und Zeit werden gelöscht
         user.password = req.body.password;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
@@ -56,6 +59,7 @@ router.post('/:token', function(req, res) {
       });
     },
     function(user, done) {
+      // Info an den User per Mail, dass Passwort geändert wurde
       var smtpTransport = nodemailer.createTransport();      
       var mailOptions = {
         to: user.email,

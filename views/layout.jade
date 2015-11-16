@@ -10,8 +10,26 @@ html
         if (localuser){
           if (typeof localuser.css == "undefined"){
             var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css';
-          }else{
-            cssFile = localuser.css;
+          }else{   
+            switch(localuser.css) {
+                case "Default":
+                    var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css';
+                    break;
+                case "Darkly":
+                    var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/darkly/bootstrap.min.css';
+                    break;
+                case "Superhero":
+                    var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/superhero/bootstrap.min.css';
+                    break;
+                case "United":
+                    var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/united/bootstrap.min.css';
+                    break;
+                case "Readable":
+                    var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/readable/bootstrap.min.css';
+                    break;
+                default:
+                    var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css';
+            }
           }
         }else{
           var cssFile = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css';
@@ -47,15 +65,15 @@ html
                   span.caret         
                 ul.dropdown-menu
                   li
-                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Fyeti%2Fbootstrap.min.css') Default
+                    a(href='/css/'+user.username+'/Default') Default
                   li
-                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Fdarkly%2Fbootstrap.min.css') Darkly
+                    a(href='/css/'+user.username+'/Darkly') Darkly
                   li
-                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Fsuperhero%2Fbootstrap.min.css') Superhero
+                    a(href='/css/'+user.username+'/Superhero') Superhero
                   li
-                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Funited%2Fbootstrap.min.css') United
+                    a(href='/css/'+user.username+'/United') United
                   li
-                    a(href='/css/'+user.username+'/%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootswatch%2F3.3.5%2Freadable%2Fbootstrap.min.css') Readable
+                    a(href='/css/'+user.username+'/Readable') Readable
               li
                 a(href='/logout') Logout
             else

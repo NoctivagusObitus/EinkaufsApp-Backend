@@ -91,12 +91,13 @@ router.post('/', function (req, res) {
                     cpasswordconfirm: cpw
                 });
             }
-            
+            // bis hierhin auschließlich Felder checks (siehe Funktionen oben)
+            // danach wird der User angelegt und gespeichert
             var user = new User({
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
-                css: '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css'
+                css: 'yeti'
             });
 
             user.save(function (err) {

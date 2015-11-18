@@ -46,7 +46,12 @@ router.post('/edit/:id', auth, function(req, res, next){
     });
 });
 
-
+router.post('/delete/:id', auth, function(req, res, next){
+    Store.remove({_id: req.params.id }, function(err){
+        console.log(err);
+        res.send("k");
+    });
+});
 
 
 module.exports = router;

@@ -149,7 +149,6 @@ paths:
       tags:
         - Groups
       responses:
-      responses:
         '200':
           description: An array of groups
           schema:
@@ -164,8 +163,29 @@ paths:
   /group/{id}:
     get:
       summary: Group
-      description: |
-        Gets one group by its ID.
+      description: Gets one group by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the group
+          required: true
+          type: string
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: One group object
+          schema:
+            type: object
+            $ref: '#/definitions/Group'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /group/member/{id}:
+    get:
+      summary: Group
+      description: Gets one group if user is a member of it
       parameters:
         - name: id
           in: path
@@ -189,26 +209,148 @@ paths:
       summary: Add Group
       description: Adds an Group to the database.
       parameters:
+        - name: " _id "
+          in: formData
+          type: string
+          description: unique identifier.
         - name: name
           in: formData
-          description: Name of the group
-          required: true
           type: string
-          format: double
+          description: Groupname
         - name: users
           in: formData
-          description: EAN number of the article
-          required: true
-          type: array
-            items:
+          type: string
+          description: "Contains an entire array of user objects. users[{user_id string, permission number]}"
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
             type: object
+            $ref: '#/definitions/Group'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /group/delete/{id}:
+    post:
+      summary: Delete
+      description: Deletes an group from the database.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the group
+          required: true
+          type: string
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: Group succesfully deleted
+          schema:
+            type: array
+            items:
+              type: object
               properties:
-                user_id: 
-                    type: string
-                     description: ID of the user within the group.
-                  permission:
-                    type: number
-                    description: Which permissions does the user have? to be defined
+                id:
+                  type: string
+                  description: Id of the deleted object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /group/edit/{id}:
+    post:
+      summary: Add Group
+      description: Adds an Group to the database
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: unique identifier.
+        - name: name
+          in: formData
+          type: string
+          description: Groupname
+        - name: users
+          in: formData
+          type: string
+          description: users
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Group'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /purchase:
+    get:
+      summary: Purchase
+      description: |
+        The Purchase endpoint delivers all available articles.
+      tags:
+        - Purchases
+      responses:
+        '200':
+          description: An array of purchase
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Purchase'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /purchase/{id}:
+    get:
+      summary: Purchase
+      description: |
+        Gets one purchase by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the purchase
+          required: true
+          type: string
+      tags:
+        - Purchases
+      responses:
+        '200':
+          description: One purchase object
+          schema:
+            type: object
+            $ref: '#/definitions/Purchase'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /purchase/add:
+    post:
+      summary: Add Purchase
+      description: Adds an Purchase to the database.
+      parameters:
+        - name: owner_id
+          in: formData
+          description: Owner of the purchase
+          required: true
+          type: string
+        - name: store_id
+          in: formData
+          description: Store the purchase is made in
+          required: true
+          type: string
+        - name: cart
+          in: formData
+          type: string
+          description: "contains entire cart array cart[{amount number, article_store_id string, benefitial_id string}]"
       tags:
         - Articles
       responses:
@@ -222,7 +364,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
             
-  /article/delete/{id}:
+  /purchase/delete/{id}:
     post:
       summary: Delete
       description: Deletes an article from the database.
@@ -249,28 +391,25 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /article/edit/{id}:
+  /purchase/edit/{id}:
     post:
       summary: Edit
       description: Saves an edited article to database.
       parameters:
-        - name: id
-          in: path
-          description: Id of the article
+        - name: owner_id
+          in: formData
+          description: Owner of the purchase
           required: true
           type: string
-        - name: name
+        - name: store_id
           in: formData
-          description: Name of the article
+          description: Store the purchase is made in
           required: true
           type: string
-          format: double
-        - name: ean
+        - name: cart
           in: formData
-          description: EAN number of the article
-          required: true
-          type: number
-          format: double
+          type: string
+          description: "cartamount number, article_store_id string, benefitial_id string"
       tags:
         - Articles
       responses:
@@ -283,6 +422,170 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  
+  /store:
+    get:
+      summary: Store
+      description: |
+        The Store endpoint delivers all available articles.
+      tags:
+        - Stores
+      responses:
+        '200':
+          description: An array of stores
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Store'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /store/{id}:
+    get:
+      summary: Store
+      description: |
+        Gets one store by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the store
+          required: true
+          type: string
+      tags:
+        - Stores
+      responses:
+        '200':
+          description: One purchase object
+          schema:
+            type: object
+            $ref: '#/definitions/Store'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /store/add:
+    post:
+      summary: Add Store
+      description: Adds an Purchase to the database.
+      parameters:
+        - name: id 
+          in: path 
+          description: UI 
+          required: true 
+          type: string
+        - name: GPS_lng
+          in: formData
+          description: GPS longitude
+          required: true
+          type: string
+        - name: GPS_lat
+          in: formData
+          description: GPS latitude
+          required: true
+          type: string
+        - name: country
+          in: formData
+          description: Country
+          type: string
+        - name: street
+          in: formData
+          description: Street
+          type: string
+        - name: street_num
+          in: formData
+          description: Streetnumber
+          type: number
+      tags:
+        - Articles
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Store'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /store/delete/{id}:
+    post:
+      summary: Delete
+      description: Deletes an store from the database.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the store
+          required: true
+          type: string
+      tags:
+        - Stores
+      responses:
+        '200':
+          description: Store succesfully deleted
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Id of the deleted object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /store/edit/{id}:
+    post:
+      summary: Edit
+      description: Saves an edited store to database.
+      parameters:
+        - name: id 
+          in: path 
+          description: UI 
+          required: true 
+          type: string
+        - name: GPS_lng
+          in: formData
+          description: GPS longitude
+          required: true
+          type: string
+        - name: GPS_lat
+          in: formData
+          description: GPS latitude
+          required: true
+          type: string
+        - name: country
+          in: formData
+          description: Country
+          type: string
+        - name: street
+          in: formData
+          description: Street
+          type: string
+        - name: street_num
+          in: formData
+          description: Streetnumber
+          type: number
+      tags:
+        - Stores
+      responses:
+        '200':
+          description: The object saved to db
+          schema:
+            type: object
+            $ref: '#/definitions/Store'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
+  
+  
+  
+  
+  
+  
   
 definitions:
   Article:

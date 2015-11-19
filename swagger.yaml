@@ -229,7 +229,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-            
   /group/delete/{id}:
     post:
       summary: Delete
@@ -257,7 +256,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  
   /group/edit/{id}:
     post:
       summary: Edit Group
@@ -267,6 +265,7 @@ paths:
           in: path
           type: string
           description: unique identifier.
+          required: true
         - name: name
           in: formData
           type: string
@@ -348,13 +347,13 @@ paths:
           type: string
           description: "contains entire cart array cart[{amount number, article_store_id string, benefitial_id string}]"
       tags:
-        - Articles
+        - Purchases
       responses:
         '200':
           description: The object saved to db
           schema:
             type: object
-            $ref: '#/definitions/Article'
+            $ref: '#/definitions/Purchase'
         default:
           description: Unexpected error
           schema:
@@ -363,18 +362,18 @@ paths:
   /purchase/delete/{id}:
     post:
       summary: Delete
-      description: Deletes an article from the database.
+      description: Deletes an pruchase from the database.
       parameters:
         - name: id
           in: path
-          description: Id of the article
+          description: Id of the purchase
           required: true
           type: string
       tags:
-        - Articles
+        - Purchases
       responses:
         '200':
-          description: Article succesfully deleted
+          description: Purchase succesfully deleted
           schema:
             type: array
             items:
@@ -392,6 +391,11 @@ paths:
       summary: Edit
       description: Saves an edited article to database.
       parameters:
+        - name: id 
+          in: path
+          description: Purchase ID
+          required: true
+          type: string
         - name: owner_id
           in: formData
           description: Owner of the purchase
@@ -407,13 +411,13 @@ paths:
           type: string
           description: "cartamount number, article_store_id string, benefitial_id string"
       tags:
-        - Articles
+        - Purchases
       responses:
         '200':
           description: The object saved to db
           schema:
             type: object
-            $ref: '#/definitions/Article'
+            $ref: '#/definitions/Purchase'
         default:
           description: Unexpected error
           schema:
@@ -465,11 +469,6 @@ paths:
       summary: Add Store
       description: Adds an Purchase to the database.
       parameters:
-        - name: id 
-          in: path 
-          description: UI 
-          required: true 
-          type: string
         - name: GPS_lng
           in: formData
           description: GPS longitude

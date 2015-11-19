@@ -209,10 +209,6 @@ paths:
       summary: Add Group
       description: Adds an Group to the database.
       parameters:
-        - name: " _id "
-          in: formData
-          type: string
-          description: unique identifier.
         - name: name
           in: formData
           type: string
@@ -264,7 +260,7 @@ paths:
   
   /group/edit/{id}:
     post:
-      summary: Add Group
+      summary: Edit Group
       description: Adds an Group to the database
       parameters:
         - name: id

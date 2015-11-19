@@ -580,13 +580,70 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error' 
-  
-  
-  
-  
-  
-  
-  
+  /user:
+    get:
+      summary: Articles
+      description: |
+        The User endpoint delivers all available users.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: An array of user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /user/{id}:
+    get:
+      summary: Article
+      description: |
+        Gets one user by its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the article
+          required: true
+          type: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: One user object
+          schema:
+            type: object
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /user/name/{name}:
+    get:
+      summary: Article
+      description: |
+        Gets one user by its name.
+      parameters:
+        - name: name
+          in: path
+          description: Name of the user
+          required: true
+          type: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: One user object
+          schema:
+            type: object
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
 definitions:
   Article:
     type: object

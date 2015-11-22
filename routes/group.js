@@ -16,7 +16,7 @@ router.get('/:id', function (req, res, next){
 });
 
 router.get('/member/:id', function (req, res, next){
-    Group.find({users.user_id: req.params.id}, function(err, groups){
+    Group.find({'users.user_id': req.params.id}, function(err, groups){
         res.send(groups);
     });
 });

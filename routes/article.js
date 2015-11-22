@@ -62,4 +62,12 @@ router.get('/bystore/:id', auth, function(req, res, next){
     });
 });
 
+router.get('/ean/:ean', auth, function(req, res, next){
+    Article.find({ean: ean}, function(err, article){
+       res.send(article); 
+    });
+    
+});
+
+
 module.exports= router;

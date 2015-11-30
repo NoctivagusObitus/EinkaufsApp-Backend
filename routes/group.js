@@ -23,7 +23,7 @@ router.get('/member/:id', function (req, res, next){
 });
 
 router.post('/edit/:id', auth, function(req, res, next){
-    Group.findbyId(req.params.id, function (err, group){
+    Group.findbyid(req.params.id, function (err, group){
         if (err) {
             console.log(err);
             res.send(err);
@@ -49,7 +49,7 @@ router.post('/add', auth, function(req, res, next){
 
 router.get('/groupusers/:id', auth, function(req, res, next){
   var users = [];
-  Group.findbyId(req.params.id, function(err, group){
+  Group.findbyid(req.params.id, function(err, group){
     for(var i = 0; i < group.users.length; i++){
       User.findById(group.users[i]._id, function(err, user){
         users[i] = user.username;

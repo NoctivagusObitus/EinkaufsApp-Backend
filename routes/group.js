@@ -49,7 +49,7 @@ router.post('/add', auth, function(req, res, next){
 
 router.get('/groupusers/:id', auth, function(req, res, next){
   var users = [];
-  Group.findbyid(req.params.id, function(err, group){
+  Group.findbyId(req.params.id, function(err, group){
     for(var i = 0; i < group.users.length; i++){
       User.findById(group.users[i]._id, function(err, user){
         users[i] = user.username;

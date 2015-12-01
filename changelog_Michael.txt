@@ -1,0 +1,14 @@
+30.10.1015
+- neues Design
+- Benutzereingaben verschwinden bei Falscheingabe in signup nicht mehr
+
+31.10.2015
+- User wird bei Loginfalscheingabe nicht mehr gelˆscht
+- Passwort Rules fur signup / reset -> min. ein kleiner und ein groﬂer Buchstabe sowie eine Zahl, min. 6 Zeichen lang
+- Username Rules f¸r signup ->  darf nur aus kleinen und groﬂen Buchstaben sowie Zahlen und "-" sowie "_" bestehen - L‰nge: 3 - 20 Zeichen
+
+11.11.2015
+- CSS Switcher implementiert (5 Designs w‰hlbar)
+
+16.11.2015
+- Funktionsweise CSS Switcher ge‰ndert, da Probleme mit / in der URL

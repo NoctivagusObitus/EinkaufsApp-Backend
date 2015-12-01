@@ -49,13 +49,9 @@ router.post('/add', auth, function(req, res, next){
 
 router.get('/groupusers/:id', auth, function(req, res, next){
   var users = [];
-  Group.find({'_id': req.params.id}, function(err, group){
-    /*for(var i = 0; i < group.users.length; i++){
-      User.find({'_id': group.users[i]._id}, function(err, user){
-        users[i] = user.username;
-      });
-    }
-      */
+  //Changed to populate. This is the better way :)
+  Group.findById(req.params.id).populate('users.user_id').exec(function(err, group){
+    console.log(group);
       res.send(group);
 
 

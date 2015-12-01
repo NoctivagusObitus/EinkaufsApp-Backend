@@ -51,7 +51,7 @@ router.get('/groupusers/:id', auth, function(req, res, next){
   var users = [];
   Group.find({'_id': req.params.id}, function(err, group){
     for(var i = 0; i < group.users.length; i++){
-      User.findById(group.users[i]._id, function(err, user){
+      User.find({'_id': group.users[i]._id}, function(err, user){
         users[i] = user.username;
       });
     }

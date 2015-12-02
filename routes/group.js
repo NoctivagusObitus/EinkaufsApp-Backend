@@ -22,8 +22,9 @@ router.get('/member/:id', function (req, res, next){
     });
 });
 
-router.post('/edit/:id', auth, function(req, res, next){
-    Group.findbyid(req.params.id, function (err, group){
+router.post('/edit', auth, function(req, res, next){
+  console.log(req.body);
+    Group.findById(req.body._id, function (err, group){
         if (err) {
             console.log(err);
             res.send(err);
@@ -35,6 +36,7 @@ router.post('/edit/:id', auth, function(req, res, next){
                 console.log(err);
                 res.send(err);
             }
+            res.send("k");
         });
     });
 });

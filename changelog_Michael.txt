@@ -12,3 +12,6 @@
 
 16.11.2015
 - Funktionsweise CSS Switcher geändert, da Probleme mit / in der URL
+
+02.12.2015
+- APK Download ist nun auf der Startseite verfügbar (https://einkaufsapp-hftlswe.rhcloud.com/)

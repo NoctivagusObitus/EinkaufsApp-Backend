@@ -5,19 +5,20 @@ var ArticleCosts = require('../models/article_costs');
 var auth = require('../conf/auth.js');
 
 router.get('/', auth, function(req, res, next){
-    Article.find(function(err, artikel){
+    ArticleCosts.find(function(err, artikel){
         res.send(artikel);
     });
 });
 
 router.post('/add', auth, function(req, res, next){
-    var new_artikel = new Article({name: req.body.name, ean: req.body.ean});
+    var new_entity = new ArticleCosts(req.body);
     new_artikel.save(function(err){
         console.log(err);
     });
     res.send("k");
 });
 
+/*
 router.post('/delete/:id', auth, function(req, res, next){
     Article.remove({_id: req.params.id }, function(err){
         console.log(err);
@@ -48,26 +49,5 @@ router.post('/edit/:id', auth, function(req, res, next){
         });
     });
 });
-
-router.get('/bystore/:id', auth, function(req, res, next){
-    var storeid = req.params.id;
-    ArticleCosts.find({store_id: storeid}, function (err, elements){
-        var articles = [];
-        for(var i = 0; i < elements.length; i++){
-            articles[i] = elements[i]._id;
-        }
-        Article.findByIds(articles, function (err, response){
-            res.send(response);
-        });
-    });
-});
-
-router.get('/ean/:ean', auth, function(req, res, next){
-    Article.find({ean: req.params.ean}, function(err, article){
-       res.send(article);
-    });
-
-});
-
-
+*/
 module.exports= router;

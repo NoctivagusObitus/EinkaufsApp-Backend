@@ -69,7 +69,7 @@ router.post('/add', auth, function(req, res, next) {
 
   for (var i = 0; i < cart.length; i++) {
     var article = cart[i].article_costs.article;
-    var cart = [];
+    var cart2 = [];
 
     Article.find({ean: article.ean}, function(err, article) {
       var articleid;
@@ -84,7 +84,7 @@ router.post('/add', auth, function(req, res, next) {
       } else {
         articleid = article._id;
       }
-        ArticleCost.find({store_id: cart[i].article_costs.store_id,article_id: articleid}, function(err, entity) {
+        ArticleCost.find({store_id: cart[i].article_costs.store_id, article_id: articleid}, function(err, entity) {
           if(err){
             var newentity = new ArticleCost({
               store_id: cart[i].article_costs.store_id,
@@ -97,7 +97,7 @@ router.post('/add', auth, function(req, res, next) {
               else articelcostsid = ent._id;
             });
           } else articlecostsid = entity._id;
-          cart.push({article_store_id: articlecostsid, amount: cart[i].amount, benefitial_id: '0' });
+          cart2.push({article_store_id: articlecostsid, amount: cart[i].amount, benefitial_id: '0' });
         });
     });
   }

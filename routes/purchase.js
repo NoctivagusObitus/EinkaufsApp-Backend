@@ -4,7 +4,7 @@ var Purchase = require('../models/purchase');
 var User = require('../models/user');
 var Store = require('../models/store');
 var Article = require('../models/article');
-var Article_store = require('../models/article_costs');
+var ArticleCost = require('../models/article_costs');
 var Group = require('../models/group');
 
 var auth = require('../conf/auth.js');

@@ -84,7 +84,7 @@ router.post('/add', auth, function(req, res, next) {
       } else {
         articleid = article._id;
       }
-        ArticleCost.find({store_id: cart[i].article_costs.store_id, article_id: articleid}, function(err, entity) {
+        ArticleCost.find({store_id: req.body.store_id, article_id: articleid}, function(err, entity) {
           if(err){
             var newentity = new ArticleCost({
               store_id: cart[i].article_costs.store_id,

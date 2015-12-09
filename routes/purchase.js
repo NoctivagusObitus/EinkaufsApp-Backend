@@ -65,8 +65,9 @@ router.get('/rich/:id', auth, function(req, res, next) {
 
 router.post('/add', auth, function(req, res, next) {
   console.log(req.body);
-  var cart = req.body.cart;
-  console.log(cart[0].amount);
+  var cart = req.body["cart"];
+  console.log = req.body["cart"][0]["amount"];
+  console.log(cart);
 
   for (var i = 0; i < cart.length; i++) {
     var article = cart[i].article_costs.article;

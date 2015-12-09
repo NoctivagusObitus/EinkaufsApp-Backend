@@ -77,7 +77,7 @@ router.post('/add', auth, function(req, res, next) {
       var articlecostsid;
       console.log(err, article);
 
-      if (err) {
+      if (err || article.length == 0) {
         var newarticle = new Article(article);
         newarticle.save(function(err, art) {
           if (err) console.log(err);

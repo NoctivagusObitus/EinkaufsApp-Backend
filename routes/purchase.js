@@ -66,6 +66,7 @@ router.get('/rich/:id', auth, function(req, res, next) {
 router.post('/add', auth, function(req, res, next) {
   console.log(req.body);
   var cart = req.body.cart;
+  console.log(cart);
 
   for (var i = 0; i < cart.length; i++) {
     var article = cart[i].article_costs.article;
@@ -74,6 +75,7 @@ router.post('/add', auth, function(req, res, next) {
     Article.find({ean: article.ean}, function(err, article) {
       var articleid;
       var articlecostsid;
+      console.log(err, article);
 
       if (err) {
         var newarticle = new Article(article);

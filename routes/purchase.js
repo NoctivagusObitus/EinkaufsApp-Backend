@@ -76,7 +76,7 @@ router.post('/add', auth, function(req, res, next) {
     Article.find({ean: article.ean}, function(err, article) {
       var articleid;
       var articlecostsid;
-      console.log(err, article);
+      //console.log(err, article);
 
       if (err || article.length == 0) {
         var newarticle = new Article(article);
@@ -100,13 +100,14 @@ router.post('/add', auth, function(req, res, next) {
               else articelcostsid = ent._id;
             });
           } else articlecostsid = entity._id;
+          console.log("cart1: " + cart);
           cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
         });
     });
   }
- console.log(cart);
+ console.log("cart2: " + cart);
   var purchase = new Purchase({store_id: req.body.store_id, owner_id: req.body.owner_id, date: req.body.date, cart: cart })
- console.log(purchase);
+ console.log("purchase: " + purchase);
 /*
   var purchase = new Purchase({
     date: req.body.date,

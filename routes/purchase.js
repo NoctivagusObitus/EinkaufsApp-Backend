@@ -107,7 +107,7 @@ router.post('/add', auth, function(req, res, next) {
               } else articlecostsid = entity._id;
               console.log("i-6: " + i);
               console.log("req.body.cart[i]: " + req.body.cart[i]);
-              console.log("req.body.cart[1]: " + req.body.cart[1].amount);
+              console.log("req.body.cart[0]: " + req.body.cart[0].amount);
               cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
             });
         });

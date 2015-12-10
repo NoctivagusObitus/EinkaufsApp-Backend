@@ -64,11 +64,11 @@ router.get('/rich/:id', auth, function(req, res, next) {
 
 
 router.post('/add', auth, function(req, res, next) {
-  console.log(req.body);
-  console.log(req.body.cart[0]['amount']);
-  console.log(req.body.cart[0].amount);
+  //console.log(req.body);
+  //console.log(req.body.cart[0]['amount']);
+  //console.log(req.body.cart[0].amount);
   var cart = req.body.cart;
-
+  console.log("bla: " + req.body.cart.length);
   for (var i = 0; i <  req.body.cart.length; i++) {
     var article = req.body.cart[i]["article_costs"]["article"];
     var cart2 = [];
@@ -101,7 +101,7 @@ router.post('/add', auth, function(req, res, next) {
             });
           } else articlecostsid = entity._id;
           console.log("cart1: " + cart);
-          cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
+          cart.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
         });
     });
   }

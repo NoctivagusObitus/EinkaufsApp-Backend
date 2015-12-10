@@ -100,8 +100,10 @@ router.post('/add', auth, function(req, res, next) {
               else articelcostsid = ent._id;
             });
           } else articlecostsid = entity._id;
-          console.log("cart1: " + cart);
-          cart.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
+          console.log("i: " + i);
+          console.log("req.body.cart[i]: " + req.body.cart[i]);
+          console.log("req.body.cart[0]: " + req.body.cart[0].amount);
+          cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
         });
     });
   }

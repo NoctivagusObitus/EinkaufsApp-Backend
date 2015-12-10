@@ -107,13 +107,14 @@ router.post('/add', auth, function(req, res, next) {
               } else articlecostsid = entity._id;
               console.log("i-6: " + i);
               console.log("req.body.cart[i]: " + req.body.cart[i]);
-              console.log("req.body.cart[0]: " + req.body.cart[0].amount);
+              console.log("req.body.cart[1]: " + req.body.cart[1].amount);
               cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
             });
         });
       }
 
   for (var i = 0; i <  req.body.cart.length; i++) {
+    console.log("inner i: " + i);
     outer(i);
   }
  //console.log("cart2: " + cart);

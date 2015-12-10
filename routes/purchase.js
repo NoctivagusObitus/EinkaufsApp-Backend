@@ -69,15 +69,15 @@ router.post('/add', auth, function(req, res, next) {
   //console.log(req.body.cart[0].amount);
   var cart = req.body.cart;
   console.log("bla: " + req.body.cart.length);
-  for (var i = 0; i <  req.body.cart.length; i++) {
+  for (var i = 0; i <  req.body.cart.length; ++i) {
     var article = req.body.cart[i]["article_costs"]["article"];
     var cart2 = [];
-
+    console.log("i top: " + i);
+      
     Article.find({ean: article.ean}, function(err, article) {
       var articleid;
       var articlecostsid;
-      //console.log(err, article);
-
+      
       if (err || article.length == 0) {
         var newarticle = new Article(article);
         newarticle.save(function(err, art) {

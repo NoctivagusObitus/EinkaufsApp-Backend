@@ -68,8 +68,9 @@ router.post('/add', auth, function(req, res, next) {
   //console.log(req.body.cart[0]['amount']);
   //console.log(req.body.cart[0].amount);
   var cart = req.body.cart;
-  console.log("bla: " + req.body.cart.length);
-  for (var i = 0; i <  req.body.cart.length; ++i) {
+  console.log("lenght: " + req.body.cart.length);
+    
+  for (var i = 0; i <  req.body.cart.length-1; i++) {
     var article = req.body.cart[i]["article_costs"]["article"];
     var cart2 = [];
     console.log("i top: " + i);
@@ -107,9 +108,9 @@ router.post('/add', auth, function(req, res, next) {
         });
     });
   }
- console.log("cart2: " + cart);
+ //console.log("cart2: " + cart);
   var purchase = new Purchase({store_id: req.body.store_id, owner_id: req.body.owner_id, date: req.body.date, cart: cart })
- console.log("purchase: " + purchase);
+ //console.log("purchase: " + purchase);
 /*
   var purchase = new Purchase({
     date: req.body.date,

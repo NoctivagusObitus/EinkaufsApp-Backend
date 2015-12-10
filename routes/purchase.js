@@ -70,9 +70,7 @@ router.post('/add', auth, function(req, res, next) {
   var cart = req.body.cart;
   console.log("lenght: " + req.body.cart.length);
     
-  for (var i = 0; i <  req.body.cart.length; i++) {
-    
-    !function outer(i){ 
+    function outer(i){ 
         var article = req.body.cart[i]["article_costs"]["article"];
         var cart2 = [];
         console.log("i-1 " + i);
@@ -114,6 +112,9 @@ router.post('/add', auth, function(req, res, next) {
             });
         });
       }
+
+  for (var i = 0; i <  req.body.cart.length; i++) {
+    outer(i);
   }
  //console.log("cart2: " + cart);
   var purchase = new Purchase({store_id: req.body.store_id, owner_id: req.body.owner_id, date: req.body.date, cart: cart })

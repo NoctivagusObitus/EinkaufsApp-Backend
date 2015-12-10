@@ -70,10 +70,10 @@ router.post('/add', auth, function(req, res, next) {
   var cart = req.body.cart;
   console.log("lenght: " + req.body.cart.length);
     
-  for (var i = 0; i <  req.body.cart.length-1; i++) {
+  for (var i = 0; i <  req.body.cart.length; i++) {
     var article = req.body.cart[i]["article_costs"]["article"];
     var cart2 = [];
-    console.log("i top: " + i);
+    console.log("i-1 " + i);
       
     Article.find({ean: article.ean}, function(err, article) {
       var articleid;
@@ -88,6 +88,7 @@ router.post('/add', auth, function(req, res, next) {
       } else {
         articleid = article._id;
       }
+      console.log("i-2 " + i);
         ArticleCost.find({store_id: req.body.store_id, article_id: articleid}, function(err, entity) {
           if(err){
             var newentity = new ArticleCost({
@@ -101,9 +102,9 @@ router.post('/add', auth, function(req, res, next) {
               else articelcostsid = ent._id;
             });
           } else articlecostsid = entity._id;
-          console.log("i: " + i);
-          console.log("req.body.cart[i]: " + req.body.cart[i]);
-          console.log("req.body.cart[0]: " + req.body.cart[0].amount);
+          console.log("i-3: " + i);
+          console.log("req.body.cart[0]: " + req.body.cart[i]);
+          console.log("req.body.cart[i]: " + req.body.cart[0].amount);
           cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
         });
     });

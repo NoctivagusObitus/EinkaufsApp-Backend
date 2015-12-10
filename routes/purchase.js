@@ -71,46 +71,49 @@ router.post('/add', auth, function(req, res, next) {
   console.log("lenght: " + req.body.cart.length);
     
   for (var i = 0; i <  req.body.cart.length; i++) {
-    var article = req.body.cart[i]["article_costs"]["article"];
-    var cart2 = [];
-    console.log("i-1 " + i);
-      
-    Article.find({ean: article.ean}, function(err, article) {
-      console.log("i-2 " + i);
-      var articleid;
-      var articlecostsid;
-      
-      if (err || article.length == 0) {
-        console.log("i-3 " + i);
-        var newarticle = new Article(article);
-        newarticle.save(function(err, art) {
-          if (err) console.log(err);
-          else articleid = art._id;
-        });
-      } else {
-        console.log("i-4 " + i);
-        articleid = article._id;
-      }
-      console.log("i-5 " + i);
-        ArticleCost.find({store_id: req.body.store_id, article_id: articleid}, function(err, entity) {
-          if(err){
-            var newentity = new ArticleCost({
-              store_id: req.body.cart[i].article_costs.store_id,
-              article_id: article._id,
-              costs: req.body.cart[i].article_costs.costs,
-              offer: req.body.cart[i].article_costs.offer
-            });
-            newentity.save(function(err, ent) {
+    
+    !function outer(i){ 
+        var article = req.body.cart[i]["article_costs"]["article"];
+        var cart2 = [];
+        console.log("i-1 " + i);
+
+        Article.find({ean: article.ean}, function(err, article) {
+          console.log("i-2 " + i);
+          var articleid;
+          var articlecostsid;
+
+          if (err || article.length == 0) {
+            console.log("i-3 " + i);
+            var newarticle = new Article(article);
+            newarticle.save(function(err, art) {
               if (err) console.log(err);
-              else articelcostsid = ent._id;
+              else articleid = art._id;
             });
-          } else articlecostsid = entity._id;
-          console.log("i-6: " + i);
-          console.log("req.body.cart[i]: " + req.body.cart[i]);
-          console.log("req.body.cart[0]: " + req.body.cart[0].amount);
-          cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
+          } else {
+            console.log("i-4 " + i);
+            articleid = article._id;
+          }
+          console.log("i-5 " + i);
+            ArticleCost.find({store_id: req.body.store_id, article_id: articleid}, function(err, entity) {
+              if(err){
+                var newentity = new ArticleCost({
+                  store_id: req.body.cart[i].article_costs.store_id,
+                  article_id: article._id,
+                  costs: req.body.cart[i].article_costs.costs,
+                  offer: req.body.cart[i].article_costs.offer
+                });
+                newentity.save(function(err, ent) {
+                  if (err) console.log(err);
+                  else articelcostsid = ent._id;
+                });
+              } else articlecostsid = entity._id;
+              console.log("i-6: " + i);
+              console.log("req.body.cart[i]: " + req.body.cart[i]);
+              console.log("req.body.cart[0]: " + req.body.cart[0].amount);
+              cart2.push({article_store_id: articlecostsid, amount: req.body.cart[i].amount, benefitial_id: '0' });
+            });
         });
-    });
+      }
   }
  //console.log("cart2: " + cart);
   var purchase = new Purchase({store_id: req.body.store_id, owner_id: req.body.owner_id, date: req.body.date, cart: cart })

@@ -83,7 +83,7 @@ router.post('/add', auth, function(req, res, next) {
 
           if (err || article.length == 0) {
             console.log("i-3 " + i);
-            var newarticle = new Article(article);
+            var newarticle = new Article({ean: article.ean, name: article.name});
             newarticle.save(function(err, art) {
               if (err) console.log(err);
               else articleid = art._id;

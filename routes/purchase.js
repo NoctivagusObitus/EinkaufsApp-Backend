@@ -69,9 +69,10 @@ router.post('/add', auth, function(req, res, next) {
   //console.log(req.body.cart[0].amount);
   var cart = req.body.cart;
   console.log("lenght: " + req.body.cart.length);
-    
-    function outer(i){ 
-        var article = req.body.cart[i]["article_costs"]["article"];
+
+    function outer(i){
+        var article = req.body.cart[i].article_costs.article
+        console.log(article);
         var cart2 = [];
         console.log("i-1 " + i);
 
@@ -93,7 +94,7 @@ router.post('/add', auth, function(req, res, next) {
           }
           console.log("i-5 " + i);
             ArticleCost.find({store_id: req.body.store_id, article_id: articleid}, function(err, entity) {
-              if(err){
+              if(err || article.length == 0){
                 var newentity = new ArticleCost({
                   store_id: req.body.cart[i].article_costs.store_id,
                   article_id: article._id,
@@ -118,7 +119,7 @@ router.post('/add', auth, function(req, res, next) {
     outer(i);
   }
  //console.log("cart2: " + cart);
-  var purchase = new Purchase({store_id: req.body.store_id, owner_id: req.body.owner_id, date: req.body.date, cart: cart })
+  var purchase = new Purchase({store_id: req.body.store_id, owner_id: req.body.owner_id, date: req.body.date, cart: cart2 })
  //console.log("purchase: " + purchase);
 /*
   var purchase = new Purchase({
